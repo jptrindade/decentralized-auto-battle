@@ -15,11 +15,4 @@ contract CombatHelperTest is DSTest {
         unitHelper._createUnit("mage", 50, 50, 2);
         unitHelper._createUnit("tank", 50, 200, 3);
     }
-
-    function testCreateUnit() public {
-        unitHelper._createUnit("testUnit", 100, 100, 3);
-        UnitHelper.Unit[] memory units = unitHelper.getUnits();
-        UnitHelper.Unit memory unit = units[0];
-        assertTrue(unit.hp == 100);
-    }
 }
