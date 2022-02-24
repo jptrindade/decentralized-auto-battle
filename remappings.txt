@@ -1,0 +1,2 @@
+ds-test/=lib/ds-test/src/
+hardhat/=lib/hardhat/packages/hardhat-core/
