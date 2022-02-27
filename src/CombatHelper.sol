@@ -6,6 +6,7 @@ import "hardhat/console.sol";
 import "./lib/Unit.sol";
 import "./lib/SafeMath.sol";
 import "./lib/Result.sol";
+import "./UnitHelper.sol";
 
 contract CombatHelper is Ownable {
     using SafeMath16 for uint16;
@@ -66,7 +67,7 @@ contract CombatHelper is Ownable {
         UnitLibrary.Unit[] memory _team1,
         UnitLibrary.Unit[] memory _team2
     )
-        external
+        internal
         pure
         returns (UnitLibrary.Unit[] memory, UnitLibrary.Unit[] memory)
     {
@@ -90,5 +91,21 @@ contract CombatHelper is Ownable {
             }
         }
         return (_team1, _team2);
+    }
+
+    function _executeMatch(
+        address _unitHelperAddress,
+        uint8[] memory _team1,
+        uint8[] memory _team2,
+        uint8 points
+    ) external view returns (ResultLibrary.Result) {
+        UnitLibrary.Unit[] memory team1 = UnitHelper(_unitHelperAddress)
+            ._initializeTeam(_team1, points);
+        UnitLibrary.Unit[] memory team2 = UnitHelper(_unitHelperAddress)
+            ._initializeTeam(_team2, points);
+
+        (team1, team2) = _teamBattle(team1, team2);
+
+        return _confirmWinner(team1, team2);
     }
 }

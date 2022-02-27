@@ -46,8 +46,8 @@ contract UnitHelper is Ownable {
         unitToAbility[_unitId] = ability;
     }
 
-    function validTeam(uint8[] memory team, uint8 points)
-        external
+    function _validTeam(uint8[] memory team, uint8 points)
+        internal
         view
         returns (bool)
     {
@@ -64,19 +64,6 @@ contract UnitHelper is Ownable {
         return true;
     }
 
-    function _initializeTeam(uint8[] memory _team)
-        external
-        view
-        returns (UnitLibrary.Unit[] memory)
-    {
-        uint256 teamLength = _team.length;
-        UnitLibrary.Unit[] memory team = new UnitLibrary.Unit[](teamLength);
-        for (uint256 i = 0; i < teamLength; i++) {
-            team[i] = _initializeUnit(_team[i]);
-        }
-        return team;
-    }
-
     function _initializeUnit(uint8 _unitId)
         internal
         view
@@ -84,6 +71,20 @@ contract UnitHelper is Ownable {
     {
         UnitLibrary.Unit memory unit = units[_unitId];
         return UnitLibrary.Unit(unit.name, unit.hp, unit.attack, unit.points);
+    }
+
+    function _initializeTeam(uint8[] memory _team, uint8 points)
+        external
+        view
+        returns (UnitLibrary.Unit[] memory)
+    {
+        require(_validTeam(_team, points));
+        uint256 teamLength = _team.length;
+        UnitLibrary.Unit[] memory team = new UnitLibrary.Unit[](teamLength);
+        for (uint256 i = 0; i < teamLength; i++) {
+            team[i] = _initializeUnit(_team[i]);
+        }
+        return team;
     }
 
     function getUnits() external view returns (UnitLibrary.Unit[] memory) {
