@@ -17,7 +17,7 @@ contract CombatHelper is Ownable {
         pure
         returns (UnitLibrary.Unit memory)
     {
-        if (power > target.hp) {
+        if (power >= target.hp) {
             target.hp = 0;
         } else {
             target.hp = target.hp.sub(power);
@@ -75,7 +75,6 @@ contract CombatHelper is Ownable {
         uint256 _teamSize1 = _team1.length;
         uint8 p2 = 0;
         uint256 _teamSize2 = _team2.length;
-
         while (p1 < _teamSize1 && p2 < _teamSize2) {
             UnitLibrary.Unit memory unit1 = _team1[p1];
             UnitLibrary.Unit memory unit2 = _team2[p2];
@@ -83,10 +82,10 @@ contract CombatHelper is Ownable {
             unit2 = executeAttackOnTarget(unit1.attack, unit2);
             unit1 = executeAttackOnTarget(unit2.attack, unit1);
 
-            if (_isAlive(unit1)) {
+            if (!_isAlive(unit1)) {
                 p1 = p1.add(1);
             }
-            if (_isAlive(unit2)) {
+            if (!_isAlive(unit2)) {
                 p2 = p2.add(1);
             }
         }
