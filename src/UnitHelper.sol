@@ -47,7 +47,7 @@ contract UnitHelper is Ownable {
     }
 
     function _validTeam(uint8[] memory team, uint8 points)
-        internal
+        public
         view
         returns (bool)
     {

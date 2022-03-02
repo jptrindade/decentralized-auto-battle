@@ -35,7 +35,7 @@ contract UnitHelperTest is DSTest {
         uint8[] memory team = new uint8[](2);
         team[0] = 0;
         team[1] = 1;
-        assert(unitHelper.validTeam(team, 50));
+        assert(unitHelper._validTeam(team, 50));
     }
 
     function testFailValidTeamPoints() public {
@@ -44,7 +44,7 @@ contract UnitHelperTest is DSTest {
         uint8[] memory team = new uint8[](2);
         team[0] = 0;
         team[1] = 1;
-        assert(unitHelper.validTeam(team, 4));
+        assert(unitHelper._validTeam(team, 4));
     }
 
     function testFailValidTeamMember() public {
@@ -53,6 +53,6 @@ contract UnitHelperTest is DSTest {
         uint8[] memory team = new uint8[](2);
         team[0] = 0;
         team[1] = 2;
-        assert(unitHelper.validTeam(team, 50));
+        assert(unitHelper._validTeam(team, 50));
     }
 }
