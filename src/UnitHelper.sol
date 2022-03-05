@@ -90,4 +90,8 @@ contract UnitHelper is Ownable {
     function getUnits() external view returns (UnitLibrary.Unit[] memory) {
         return units;
     }
+
+    function getUnitCount() public view returns (uint256 count) {
+        return units.length;
+    }
 }
