@@ -19,7 +19,7 @@ contract CombatHelperTest is BaseTest {
         team1[1] = 2;
         team2[0] = 0;
         team2[1] = 1;
-        ResultLibrary.Result result = combatHelper._executeMatch(
+        ResultLibrary.Result result = combatHelper.executeMatch(
             address(unitHelper),
             team1,
             team2,

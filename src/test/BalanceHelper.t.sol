@@ -15,7 +15,7 @@ contract BalanceHelperTest is BaseTest {
         balanceHelper.resetStats(address(unitHelper));
         assert(balanceHelper.getStats().length == 3);
 
-        unitHelper._createUnit("thief", 70, 50, 1);
+        unitHelper.createUnit("thief", 70, 50, 1);
         balanceHelper.resetStats(address(unitHelper));
         assert(balanceHelper.getStats().length == 4);
     }

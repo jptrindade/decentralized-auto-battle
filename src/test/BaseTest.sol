@@ -15,9 +15,9 @@ contract BaseTest is DSTest {
 
     function createTestData() public {
         unitHelper = new UnitHelper();
-        unitHelper._createUnit("warrior", 100, 100, 3);
-        unitHelper._createUnit("mage", 50, 50, 2);
-        unitHelper._createUnit("tank", 200, 50, 3);
+        unitHelper.createUnit("warrior", 100, 100, 3);
+        unitHelper.createUnit("mage", 50, 50, 2);
+        unitHelper.createUnit("tank", 200, 50, 3);
 
         combatHelper = new CombatHelper();
 

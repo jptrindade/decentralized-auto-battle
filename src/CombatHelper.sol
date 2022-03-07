@@ -92,16 +92,16 @@ contract CombatHelper is Ownable {
         return (_team1, _team2);
     }
 
-    function _executeMatch(
+    function executeMatch(
         address _unitHelperAddress,
         uint8[] memory _team1,
         uint8[] memory _team2,
         uint8 points
     ) external view returns (ResultLibrary.Result) {
         UnitLibrary.Unit[] memory team1 = UnitHelper(_unitHelperAddress)
-            ._initializeTeam(_team1, points);
+            .initializeTeam(_team1, points);
         UnitLibrary.Unit[] memory team2 = UnitHelper(_unitHelperAddress)
-            ._initializeTeam(_team2, points);
+            .initializeTeam(_team2, points);
 
         (team1, team2) = _teamBattle(team1, team2);
 

@@ -14,45 +14,45 @@ contract UnitHelperTest is DSTest {
     }
 
     function testCreateUnit() public {
-        unitHelper._createUnit("warrior", 100, 100, 3);
+        unitHelper.createUnit("warrior", 100, 100, 3);
         UnitLibrary.Unit[] memory units = unitHelper.getUnits();
         UnitLibrary.Unit memory unit = units[0];
         assertTrue(unit.hp == 100);
     }
 
     function testFailCreateUnitInvalidPoints() public {
-        unitHelper._createUnit("warrior", 100, 100, 0);
+        unitHelper.createUnit("warrior", 100, 100, 0);
     }
 
     function testFailCreateUnitInvalidName() public {
-        unitHelper._createUnit("warrior", 100, 100, 3);
-        unitHelper._createUnit("warrior", 100, 100, 3);
+        unitHelper.createUnit("warrior", 100, 100, 3);
+        unitHelper.createUnit("warrior", 100, 100, 3);
     }
 
     function testValidTeam() public {
-        unitHelper._createUnit("mage", 100, 100, 3);
-        unitHelper._createUnit("tank", 100, 100, 2);
+        unitHelper.createUnit("mage", 100, 100, 3);
+        unitHelper.createUnit("tank", 100, 100, 2);
         uint8[] memory team = new uint8[](2);
         team[0] = 0;
         team[1] = 1;
-        assert(unitHelper._validTeam(team, 50));
+        assert(unitHelper.validTeam(team, 50));
     }
 
     function testFailValidTeamPoints() public {
-        unitHelper._createUnit("mage", 100, 100, 3);
-        unitHelper._createUnit("tank", 100, 100, 2);
+        unitHelper.createUnit("mage", 100, 100, 3);
+        unitHelper.createUnit("tank", 100, 100, 2);
         uint8[] memory team = new uint8[](2);
         team[0] = 0;
         team[1] = 1;
-        assert(unitHelper._validTeam(team, 4));
+        assert(unitHelper.validTeam(team, 4));
     }
 
     function testFailValidTeamMember() public {
-        unitHelper._createUnit("mage", 100, 100, 3);
-        unitHelper._createUnit("tank", 100, 100, 2);
+        unitHelper.createUnit("mage", 100, 100, 3);
+        unitHelper.createUnit("tank", 100, 100, 2);
         uint8[] memory team = new uint8[](2);
         team[0] = 0;
         team[1] = 2;
-        assert(unitHelper._validTeam(team, 50));
+        assert(unitHelper.validTeam(team, 50));
     }
 }
